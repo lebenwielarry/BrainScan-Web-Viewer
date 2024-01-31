@@ -1,0 +1,142 @@
+html {
+    height: 100%; /* gibt dem Root-Element eine feste Höhe */
+}body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* stellt sicher, dass der Body mindestens so groß wie das Fenster ist */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background: #677381;
+    color: #ffffff;
+}h1 {
+    color: #E6F4F1;
+    text-align: left;
+    font-size: 80px;
+    margin: 20px 20px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}.content-container {
+    display: flex;
+    flex: 1;
+}.papaya-container {
+    flex: 1;
+    max-width: 50%;
+}.additional-content {
+    flex: 1;
+}.slider-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}.slider-label {
+    margin-right: 10px; /* Abstand zwischen Label und Slider */
+    margin-left: 10px;
+    width: 320px; /* Gleiche Breite für alle Labels */
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}input[type=range] {
+    flex-grow: 0; /* Remove flex-grow to stop filling the remaining space */
+    width: 800px; /* Adjust the width as needed */
+}.image-display-container {
+    display: flex;
+    align-items: flex-start; /* Behält die Ausrichtung der Elemente oben bei */
+    justify-content: left; /* Zentriert die Elemente horizontal */
+    margin-top: 0px; /* Kein zusätzlicher Abstand nach oben */
+    font-family: sans-serif;
+    font-size: 20px;
+}.image-container {
+    display: flex; /* Flex-Container für vertikale Anordnung von Label, Bild und Button */
+    flex-direction: column; /* Vertikale Anordnung */
+    align-items: center; /* Zentriert die Inhalte horizontal */
+    margin: 0 10px; /* Horizontaler Abstand zu den Seiten */
+    padding-top: 90px; /* Entfernt das obere Padding, um die Bilder näher nach oben zu bringen */
+}.image-display {
+    border: 1px solid #ffffff; /* Weißer Rahmen könnte besser zum Design passen */
+    width: 390px;
+    height: 462px;
+    margin-top: 20px; /* Abstand zwischen Label und Bild */
+}#equal-sign {
+    font-size: 24px;
+    align-self: center; /* Zentriert das Gleichheitszeichen vertikal */
+    margin: 0 20px; /* Abstand um das Gleichheitszeichen */
+    padding-top: 200px;
+}.button-container {
+    margin-top: 20px; /* Zusätzlicher Abstand zum Button */
+}.footer {
+    padding: 250px;
+    background-color: #D9E6F6;
+    font-size: 22px;
+    color: black;
+    text-align: center;
+    margin-top: auto; /* schiebt den Footer nach unten, wenn der Content nicht die ganze Höhe ausfüllt */
+    /* Create a vertical gradient from the footer color to the page color */
+    background-image: linear-gradient(to top, #324B50 30%, #677381 100%);
+}.slider-input {
+    width: 60px; /* Breite des Input-Feldes */
+    padding: 10px; /* Innenabstand für bessere Lesbarkeit */
+    padding-left: 10px;
+    border: 1px solid #ffffff; /* Rahmen, der zum Design passt */
+    border-radius: 5px; /* Abgerundete Ecken */
+    background-color: #95B0B6; /* Hintergrundfarbe, die zum Footer passt */
+    color: #ffffff; /* Textfarbe */
+    font-size: 20px; /* Größere Schrift für bessere Lesbarkeit */
+    text-align: center; /* Zentrierter Text */
+    margin-left: 10px; /* Beibehaltung des Abstands zum Slider */
+    transition: border-color 0.3s ease-in-out; /* Sanfter Übergang für die Border-Farbe */
+}#gender-select {
+    padding: 5px;
+}.checkboxes-container {
+    display: flex;
+    justify-content: left; /* Zentriert die Checkboxen horizontal */
+    flex-wrap: wrap; /* Erlaubt das Umfließen auf kleinere Bildschirme */
+    font-family: sans-serif;
+}.checkbox-container {
+    margin-left: 35px;
+    font-size: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex; /* Dies sorgt dafür, dass das Label und die Checkbox in einer Reihe sind */
+    align-items: center; /* Dies zentriert die Checkbox vertikal im Verhältnis zum Labeltext */
+}.checkboxes-container .checkbox-container:first-child {
+    margin-left: 0;
+}.checkbox-container input[type="checkbox"] {
+    transform: scale(1.5); /* Standardgröße */
+    transition: transform 0.2s ease; /* Animiert die Transformation */
+}.checkbox-container input[type="checkbox"]:checked {
+    transform: scale(2); /* Vergrößert die Checkbox um das 1,5-fache */
+}.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+}.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}.close:hover,.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}#viewSelect {
+margin-top: 60px;
+margin-left: 40px;
+}
