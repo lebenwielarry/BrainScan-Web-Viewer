@@ -1,3 +1,5 @@
+![alt text](https://github.com/lebenwielarry/BrainScan-Web-Viewer/blob/main/images/image4.png)
+
 # BrainScan-Web-Viewer
 
 Dieses Projekt ist ein einfacher Web-Viewer für Hirnscans. Es ermöglicht Benutzern, Hirnscans anzuzeigen, bestimmte Parameter anzupassen und Bildverarbeitung auf den Scans anzuwenden.
