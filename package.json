@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "jsdoc": "^4.0.3",
+    "minami": "^1.2.3",
+    "taffydb": "^2.7.3"
+  },
+  "scripts": {
+    "generate-docs": "jsdoc -c jsdoc.json"
+  },
+  "dependencies": {
+    "@jsdoc/salty": "^0.2.8",
+    "uc.micro": "^2.1.0"
+  }
+}

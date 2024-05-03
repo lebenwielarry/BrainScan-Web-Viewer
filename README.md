@@ -1,37 +1,37 @@
-![alt text](https://github.com/lebenwielarry/BrainScan-Web-Viewer/blob/main/images/image4.png)
+![Image](https://raw.githubusercontent.com/lebenwielarry/BrainScan-Web-Viewer/main/images/image4.png)
 
 # BrainScan-Web-Viewer
 
-Dieses Projekt ist ein einfacher Web-Viewer für Hirnscans. Es ermöglicht Benutzern, Hirnscans anzuzeigen, bestimmte Parameter anzupassen und Bildverarbeitung auf den Scans anzuwenden.
+This project is a simple web viewer for brain scans. It allows users to view brain scans, adjust certain parameters, and apply image processing to the scans.
 
 ## Features
 
-- Anzeigen von Hirnscans in verschiedenen Ansichten (axial, coronal, saggital).
-- Anpassung von Parametern wie Geschlecht, Alter und Hirnvolumen.
-- Anwendung von Bildverarbeitungstechniken auf die Scans.
-- Vergleich von Originalbildern mit bearbeiteten und differenzierten Bildern.
-- Vergrößerung von Bildern im Modal-Fenster.
-- Responsive Benutzeroberfläche.
+- Display of brain scans in various views (axial, coronal, sagittal).
+- Adjustment of parameters such as gender, age, and brain volume.
+- Application of image processing techniques to the scans.
+- Comparison of original images with processed and differentiated images.
+- Enlargement of images in a modal window.
+- Responsive user interface.
 
-## Verwendung
+## Usage
 
-Um das Projekt zu verwenden, öffne einfach die `index.html`-Datei in einem Webbrowser. Du kannst dann die Ansicht auswählen, Parameter anpassen und auf die Schaltflächen klicken, um die entsprechenden Aktionen auszuführen.
+To use the project, simply open the `index.html` file in a web browser. You can then select the view, adjust parameters, and click the buttons to perform the corresponding actions.
 
-## Technologien
+## Technologies
 
 - HTML
 - CSS
 - JavaScript
 - [Papaya Viewer](https://github.com/rii-mango/Papaya)
 
-## Mitwirkende
+## Contributors
 
 - Burak Ertan
 
 ## Lizenz
 
-Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
+This project is licensed under the [MIT-Lizenz](LICENSE).
 
 ---
 
-Viel Spaß beim Benutzen des Brain Scan Image Viewers!
+Enjoy using the Brain Scan Image Viewer!

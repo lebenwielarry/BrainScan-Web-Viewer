@@ -1,64 +1,72 @@
-// Funktion zum Aktualisieren des Gehirnscans basierend auf den gegebenen Eingaben
+/**
+ * Updates the source of an image element based on a provided image ID and button value.
+ * @param {string} imageId - The ID of the image element to update.
+ * @param {string} buttonValue - The button value that might affect the image path (not currently used).
+ */
 function calculateBrainScanFromGivenInput(imageId, buttonValue) {
     var imagePath = "/images/saggital_view.png";
     var imageElement = document.getElementById(imageId);
     imageElement.src = imagePath;
 }
 
-// Funktion zur Berechnung der Differenz zwischen zwei Bildern
+/**
+ * Calculates and displays the difference between two images by processing their pixel data.
+ */
 function calculateDifference() {
     var imageElement1 = document.getElementById("original-image");
     var imageElement2 = document.getElementById("processed-image");
 
-    // Erstellen eines Canvas-Elements zum Zeichnen der Bilder
+    // Creating canvas element for drawing images
     var canvas = document.createElement("canvas");
     canvas.width = 390;
     canvas.height = 462;
     var ctx = canvas.getContext("2d");
 
-    // Zeichnen des ersten Bildes auf das Canvas
+    // Drawing of the first image on the canvas
     ctx.drawImage(imageElement1, 0, 0, 390, 462);
     var imgData1 = ctx.getImageData(0, 0, 390, 462);
 
-    // Zeichnen des zweiten Bildes auf das Canvas
+    // Drawing of the second image on the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(imageElement2, 0, 0, 390, 462);
     var imgData2 = ctx.getImageData(0, 0, 390, 462);
 
-    // Erstellen eines Ergebnis-Canvas-Elements
+    // Creating a resolution-canvas-element 
     var resultCanvas = document.createElement("canvas");
     resultCanvas.width = 390;
     resultCanvas.height = 462;
     var resultCtx = resultCanvas.getContext("2d");
 
-    // Berechnung und Farbzuweisung
+    // Calculation and color allocation
     for (var i = 0; i < imgData1.data.length; i += 4) {
         var gray1 = (imgData1.data[i] + imgData1.data[i + 1] + imgData1.data[i + 2]) / 3;
         var gray2 = (imgData2.data[i] + imgData2.data[i + 1] + imgData2.data[i + 2]) / 3;
         var diff = gray1 - gray2;
 
-        // Normalisieren der Differenz auf den Bereich von 0 bis 255
+        // Normalization of the difference on the region of 0 to 255
         var intensity = Math.abs(diff) / 255;
         var red = diff > 0 ? intensity * 255 : 0;
         var blue = diff < 0 ? intensity * 255 : 0;
         var green = 0;
 
-        // Mischen mit Weiß für einen weißen Hintergrund
+        // Mixing with white for white background 
         red += (1 - intensity) * 255;
         blue += (1 - intensity) * 255;
         green += (1 - intensity) * 255;
 
-        // Festlegen der Farbe für das aktuelle Pixel
+        // getting the color of the current pixel 
         resultCtx.fillStyle = `rgb(${Math.round(red)}, ${Math.round(green)}, ${Math.round(blue)})`;
         resultCtx.fillRect(i / 4 % 390, Math.floor(i / 4 / 390), 1, 1);
     }
 
-    // Setzen des src-Attributs des dritten Bildes auf das Canvas-Bild
+    // Setting the src-attribute of the third image to canvas
     document.getElementById("result-image").src = resultCanvas.toDataURL("image/png");
 }
 
 
-//Aktuellen Slice berechnen (basierend auf ausgewählter View)
+/**
+ * Calculates the current slice to be displayed based on the viewer's current coordinate and the selected view.
+ */
 function getCurrentSlice() {
 var currentCoord = papayaContainers[0].viewer.currentCoord;
 var selectedView = document.getElementById('viewSelect').value;
@@ -68,11 +76,11 @@ var sliceIndex;
 
 switch (selectedView) {
     case 'axial':
-        // Invertiere die Z-Achse
+        // Invert z-axis
         sliceIndex = volumeDims.zDim - 1 - currentCoord.z;
         break;
     case 'coronal':
-        // Invertiere die Y-Achse
+        // Invert y-axis 
         sliceIndex = volumeDims.yDim - 1 - currentCoord.y;
         break;
     case 'saggital':
@@ -84,7 +92,11 @@ drawSlice(sliceIndex, selectedView);
 }
 
 
-//Funktion um das aktuelle Bild zu fetchen, anhand der Voxel Daten
+/**
+ * Draws a slice of a brain scan based on voxel data for a specific orientation.
+ * @param {number} sliceIndex - The index of the slice to draw.
+ * @param {string} orientation - The orientation of the slice ('axial', 'coronal', 'saggital').
+ */
 function drawSlice(sliceIndex, orientation) {
 var volume = papayaContainers[0].viewer.screenVolumes[0].volume;
 var canvas = document.createElement('canvas');
@@ -102,7 +114,7 @@ var dims = volume.header.imageDimensions;
 var scaleX, scaleY, sliceOffset;
 
 
-// Berechne das Verhältnis der Dimensionen basierend auf der Orientierung
+// Calculate proportion of the dimensions based on the orientation 
 var aspectRatio;
 if (orientation === 'axial') {
     aspectRatio = dims.xDim / dims.yDim;
@@ -112,24 +124,22 @@ if (orientation === 'axial') {
     aspectRatio = dims.yDim / dims.zDim;
 }
 
-// Bestimme die neue Breite und Höhe basierend auf dem Verhältnis
+// Get the new width and height based on the proportion 
 var maxWidth = 390; 
 var maxHeight = 462; 
 var newWidth, newHeight;
 if (aspectRatio > 1) {
-    // Breiter als hoch
     newWidth = maxWidth;
     newHeight = maxWidth / aspectRatio;
 } else {
-    // Höher als breit oder quadratisch
     newWidth = maxHeight * aspectRatio;
     newHeight = maxHeight;
 }
-// Aktualisiere die Canvas-Größe
+// Update canvas size 
 canvas.width = newWidth;
 canvas.height = newHeight;
 
-// Der Ursprung ist oben links im Papaya Viewer
+// The origin is in the upper left corner in the Papaya Viewer 
 if (orientation === 'axial') {
     scaleX = dims.xDim / canvas.width;
     scaleY = dims.yDim / canvas.height;
@@ -144,7 +154,7 @@ if (orientation === 'axial') {
     sliceOffset = sliceIndex * dims.yDim * dims.zDim;
 }
 
-// Konsolen-Logs für Debugging
+// Console Logs for debugging 
 console.log('Orientation: ' + orientation);
 console.log('Slice Index: ' + sliceIndex);
 console.log('Scale X: ' + scaleX);
@@ -160,12 +170,12 @@ for (var i = 0; i < volume.imageData.data.length; i++) {
 }
 var range = maxVoxelValue - minVoxelValue;
 
-// Schleife durch jede Zeile und Spalte des Canvas
+// Iteration through every row and column 
 for (var canvasY = 0; canvasY < canvas.height; canvasY++) {
     for (var canvasX = 0; canvasX < canvas.width; canvasX++) {
         var volX, volY, volZ;
 
-        // Berechne die Volumenkoordinaten basierend auf dem Skalierungsfaktor
+        // Calculate volume coordinates based on the scaling factor 
         if (orientation === 'axial') {
             volX = Math.floor(canvasX * scaleX);
             volY = Math.floor(canvasY * scaleY);
@@ -180,12 +190,12 @@ for (var canvasY = 0; canvasY < canvas.height; canvasY++) {
             volX = sliceIndex;
         }
 
-        // Den eindimensionalen Voxel-Index basierend auf den 3D-Koordinaten berechnen
+        // Calculate one-dimensional voxel index based on the 3D coordinate 
         var voxelIndex = volZ * dims.xDim * dims.yDim + volY * dims.xDim + volX;
         var voxelValue = volume.imageData.data[voxelIndex];
         var normalizedValue = ((voxelValue - minVoxelValue) / range) * 255;
         
-        // Den Pixel im ImageData-Objekt setzen
+        // Set Pixel in image object 
         var index = (canvasX + canvasY * canvas.width) * 4;
         imgData.data[index] = normalizedValue; // Rot
         imgData.data[index + 1] = normalizedValue; // Grün
@@ -193,10 +203,10 @@ for (var canvasY = 0; canvasY < canvas.height; canvasY++) {
         imgData.data[index + 3] = 255; // Alpha
     }
 }
-// Zeichne das ImageData auf das temporäre Canvas
+// Draw ImageDate on the temporary canvas 
 tempCtx.putImageData(imgData, 0, 0);
 
-// Anhand der aktuellen Orientierung, müssen bei den jeweiligen Views unterschiedliche Rotationen und oder Spiegelungen vorgenommen werden
+// Based on the depending orientation, there have to be made different kind of adjustments to show the image the right way
 if (orientation === 'axial') {
 ctx.translate(canvas.width / 2, canvas.height / 2);
 ctx.rotate(Math.PI); 
@@ -213,7 +223,7 @@ ctx.rotate(Math.PI);
 ctx.translate(-canvas.width / 2, -canvas.height / 2);
 }
 
-// Zeichne das temporäre Canvas auf das Haupt-Canvas
+// Draw temporary canvas to main canvas 
 ctx.drawImage(tempCanvas, 0, 0);
 var imageElementId = "original-image";
 var imageElement = document.getElementById('original-image');
@@ -226,7 +236,12 @@ if (imageElement) {
 }
 }
 
-//Normalisierung der Voxel Values um standartisiertes Bild Format zu erhalten
+/**
+ * Normalizes a voxel value to be within the range of 0 to 255.
+ * @param {number} value - The voxel value to normalize.
+ * @param {number} maxValue - The maximum possible voxel value.
+ * @returns {number} The normalized voxel value.
+ */
 function normalizeVoxelValue(value, maxValue) {
 return Math.min(value, maxValue) / maxValue * 255;
 }

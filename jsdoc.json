@@ -1,0 +1,28 @@
+{
+  "source": {
+    "include": [
+      "./scripts/imageProcessing.js",
+      "./scripts/inputUpdate.js"
+    ],
+    "exclude": ["node_modules", "tests"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "destination": "docs/",
+    "recurse": true,
+    "template": "node_modules/minami",
+    "readme": "/Users/burakertan/Desktop/Uni/Bachelor/Vorlesungen/Informatik/Anfängerpraktikum/BrainScan-Web-Viewer/README.md"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "includeSourcePath": true,
+    "default": {
+      "outputSourceFiles": true
+    }
+  }
+}
